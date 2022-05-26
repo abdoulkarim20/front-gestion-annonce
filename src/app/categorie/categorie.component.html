@@ -1,0 +1,26 @@
+<div class="container my-5">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="text-center">La liste des categories</h4>
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <tbody>
+                    <th>#</th>
+                    <th>Libelle</th>
+                    <th>Description</th>
+                    <th colspan="2">Actions</th>
+                </tbody>
+                <tbody>
+                    <tr *ngFor="let c of categories">
+                        <td>{{c.id}}</td>
+                        <td>{{c.libelle}}</td>
+                        <td>{{c.description}}</td>
+                        <td class="btn bg text-danger" (click)="deleteCategorie(c)"><i class="bi bi-trash3-fill"></i></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>

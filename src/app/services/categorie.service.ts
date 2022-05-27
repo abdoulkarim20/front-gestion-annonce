@@ -38,7 +38,7 @@ export class CategorieService {
   public getAllCategories():Observable<Categorie[]>{
     let rdom=Math.random();
     if(rdom<0.05) return throwError(()=>new Error("On a puis acceder a la base de donnees"));
-    else return of(this.categoris);
+    else return of([...this.categoris]); //signie renvoi moi une copie tableau categore ([...this.categoris])
   }
 
   //la methode pour supprimer une categorie

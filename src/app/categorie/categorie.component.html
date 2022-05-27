@@ -1,5 +1,8 @@
 <div class="container my-5">
-    <div class="card">
+    <ng-template #errors>
+        <div class="text-center text-danger">{{messageError}}</div>
+    </ng-template>
+    <div class="card" *ngIf="categories ; else errors">
         <div class="card-header">
             <h4 class="text-center">La liste des categories</h4>
         </div>
@@ -12,11 +15,12 @@
                     <th colspan="2">Actions</th>
                 </tbody>
                 <tbody>
-                    <tr *ngFor="let c of categories">
-                        <td>{{c.id}}</td>
-                        <td>{{c.libelle}}</td>
-                        <td>{{c.description}}</td>
-                        <td class="btn bg text-danger" (click)="deleteCategorie(c)"><i class="bi bi-trash3-fill"></i></td>
+                    <tr *ngFor="let categorie of categories">
+                        <td>{{categorie.id}}</td>
+                        <td>{{categorie.libelle}}</td>
+                        <td>{{categorie.description}}</td>
+                        <td class="btn bg text-primary" (click)="editCategorie(categorie)"><i class="bi bi-pencil-square"></i></td>
+                        <td class="btn bg text-danger" (click)="deleteCategorie(categorie)"><i class="bi bi-trash3-fill"></i></td>
                     </tr>
                 </tbody>
             </table>

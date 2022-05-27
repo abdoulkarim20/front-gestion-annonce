@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CategorieService } from '../services/categorie.service';
 
 @Component({
   selector: 'app-categorie',
@@ -9,41 +10,28 @@ export class CategorieComponent implements OnInit {
   /*en typscript ou anglula si on difini un tableau il nous genere souvent des erreur unidfined
   pour palier a cela on doit dire soit il es undifined ou metre signe de ! dans la variable du tableau voir ci-dessous */
   categories !:Array<any>;
-  Categories =[
-                {
-                  "id":1,
-                  "libelle":"Longue description d'un produit",
-                  "description":"en typscript ou anglula si on difini un tableau"
-                  
-                },
-                {
-                  "id":2,
-                  "libelle":"Longue description d'un produit",
-                  "description":"en typscript ou anglula si on difini un tableau"
-                  
-                },
-                {
-                  "id":3,
-                  "libelle":"Longue description d'un produit",
-                  "description":"en typscript ou anglula si on difini un tableau"
-                  
-                },{
-                  "id":4,
-                  "libelle":"Longue description d'un produit",
-                  "description":"en typscript ou anglula si on difini un tableau"
-                  
-                }
-              ]
+  /*message d'error voir la ligne ci-dessous*/
+  messageError!:String;
 
-  constructor() { }
+  constructor(private categorieService:CategorieService) { }
 
   ngOnInit(){
-    this.categories=this.Categories;
+    this.categorieService.getAllCategories().subscribe({
+      next:(data)=>{
+        this.categories=data;
+      },
+      error:(error)=>{
+        this.messageError=error;   
+      }
+    });
 
   }
-  deleteCategorie(g:any){
-    const index=this.Categories.indexOf(g);
-    this.Categories.splice(index,1);
+  deleteCategorie(categorie:any){
+    const index=this.categories.indexOf(categorie);
+    this.categories.splice(index,1);
+  }
+  editCategorie(categorie:any){
+    alert("Modification");
   }
 
 }

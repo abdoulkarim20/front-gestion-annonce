@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
+import { Categorie } from '../models/categorie.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategorieService {
-  private categoris !:Array<any>;
+  private categoris !:Categorie[];
   constructor() { 
     this.categoris=[
                     {
@@ -30,9 +31,15 @@ export class CategorieService {
                     }
                   ];
   }
-  public getAllCategories():Observable<Array<any>>{
+  public getAllCategories():Observable<Categorie[]>{
     let rdom=Math.random();
     if(rdom<0.05) return throwError(()=>new Error("On a puis acceder a la base de donnees"));
     else return of(this.categoris);
+  }
+
+  //la methode pour supprimer une categorie
+  public deleteCategorie(id:number):Observable<boolean>{
+    this.categoris=this.categoris.filter(c=>c.id!=id);
+    return of(true);
   }
 }

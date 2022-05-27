@@ -12,6 +12,7 @@
                     <th>#</th>
                     <th>Libelle</th>
                     <th>Description</th>
+                    <th>Promotion</th>
                     <th colspan="2">Actions</th>
                 </tbody>
                 <tbody>
@@ -19,6 +20,14 @@
                         <td>{{categorie.id}}</td>
                         <td>{{categorie.libelle}}</td>
                         <td>{{categorie.description}}</td>
+
+                        <td>
+                            <button (click)="setPromotion(categorie)" [ngClass]="categorie.promotion==true?'btn text-success':'btn text-danger'">
+                                <i *ngIf="categorie.promotion==true" class="bi bi-megaphone-fill"></i>
+                                <i *ngIf="categorie.promotion==false" class="bi bi-megaphone-fill"></i>
+                            </button>
+                        </td>
+
                         <td class="btn bg text-primary" (click)="editCategorie(categorie)"><i class="bi bi-pencil-square"></i></td>
                         <td class="btn bg text-danger" (click)="deleteCategorie(categorie)"><i class="bi bi-trash3-fill"></i></td>
                     </tr>

@@ -47,4 +47,18 @@ export class CategorieComponent implements OnInit {
     alert("Modification");
   }
 
+  setPromotion(categorie:Categorie){
+    let promotion=categorie.promotion;
+    this.categorieService.setPromotion(categorie.id).subscribe({
+      next:(data)=>{
+        categorie.promotion=!promotion;
+      },
+      error:err=>{
+        this.messageError;
+      }
+    })
+
+    // this.categorieService.setPromotion(categorie.id);
+  }
+
 }

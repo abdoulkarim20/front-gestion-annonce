@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { UUID } from 'angular2-uuid';
 import { Observable, of, throwError } from 'rxjs';
 import { Categorie } from '../models/categorie.model';
 
@@ -10,28 +11,34 @@ export class CategorieService {
   constructor() { 
     this.categoris=[
                     {
-                      "id":1,
+                      "id":UUID.UUID(),
                       "libelle":"Longue description d'un produit",
                       "description":"en typscript ou anglula si on difini un tableau",
                       "promotion":true
                     },
                     {
-                      "id":2,
+                      "id":UUID.UUID(),
                       "libelle":"Longue description d'un produit",
                       "description":"en typscript ou anglula si on difini un tableau",
                       "promotion":false              
                     },
                     {
-                      "id":3,
+                      "id":UUID.UUID(),
                       "libelle":"Longue description d'un produit",
                       "description":"en typscript ou anglula si on difini un tableau",
                       "promotion":true
                     },
                     {
-                      "id":4,
-                      "libelle":"Longue description d'un produit",
+                      "id":UUID.UUID(),
+                      "libelle":"longue description d'un produit",
                       "description":"en typscript ou anglula si on difini un tableau",
                       "promotion":true             
+                    },
+                    {
+                      "id":UUID.UUID(),
+                      "libelle":"Electronique",
+                      "description":"C'est un pc de bonne qualiter",
+                      "promotion":false             
                     }
                   ];
   }
@@ -42,12 +49,12 @@ export class CategorieService {
   }
 
   //la methode pour supprimer une categorie
-  public deleteCategorie(id:number):Observable<boolean>{
+  public deleteCategorie(id:string):Observable<boolean>{
     this.categoris=this.categoris.filter(c=>c.id!=id);
     return of(true);
   }
 
-  public setPromotion(id:number):Observable<boolean>{
+  public setPromotion(id:string):Observable<boolean>{
     //je cherche d'abbord le produit a modifier
     // alert("je suis la pour changer la pormotion");
     let categorie=this.categoris.find(categorie=>categorie.id==id)
@@ -57,5 +64,9 @@ export class CategorieService {
     }else{
       return throwError(()=>new Error("Produit n'existe pas"));
     }
+  }
+  public rechercheCategorie(motcle:string):Observable<Categorie[]>{
+    let categorieCercher=this.categoris.filter(categorie=>categorie.libelle.includes(motcle))
+    return of(categorieCercher);
   }
 }

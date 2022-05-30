@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Categorie } from '../models/categorie.model';
 import { CategorieService } from '../services/categorie.service';
 
@@ -13,11 +14,16 @@ export class CategorieComponent implements OnInit {
   categories !:Categorie[];
   /*message d'error voir la ligne ci-dessous*/
   messageError!:String;
+  /*la variable pour la recherche*/
+  searcheForm! : FormGroup;
 
-  constructor(private categorieService:CategorieService) { }
+  constructor(private categorieService:CategorieService,private fb:FormBuilder) { }
 
   ngOnInit(){
     this.getAllCategories();
+    this.searcheForm=this.fb.group({
+      motcle:this.fb.control(null)
+    })
   }
 
   getAllCategories(){
@@ -59,6 +65,15 @@ export class CategorieComponent implements OnInit {
     })
 
     // this.categorieService.setPromotion(categorie.id);
+  }
+
+  seracheCategorie(){
+    let motcle=this.searcheForm.value.motcle;
+    this.categorieService.rechercheCategorie(motcle).subscribe({
+      next:(data)=>{
+        this.categories=data;
+      }
+    })
   }
 
 }

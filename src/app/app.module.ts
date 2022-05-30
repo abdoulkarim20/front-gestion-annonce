@@ -7,6 +7,8 @@ import { CategorieComponent } from './categorie/categorie.component';
 import { ProduitComponent } from './produit/produit.component';
 import { AccueilComponent } from './accueil/accueil.component';
 import { FooterComponent } from './footer/footer.component';
+import { FormulaireComponent } from './formulaire/formulaire.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -14,11 +16,13 @@ import { FooterComponent } from './footer/footer.component';
     CategorieComponent,
     ProduitComponent,
     AccueilComponent,
-    FooterComponent
+    FooterComponent,
+    FormulaireComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

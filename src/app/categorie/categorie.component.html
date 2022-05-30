@@ -5,6 +5,13 @@
     <div class="card" *ngIf="categories ; else errors">
         <div class="card-header">
             <h4 class="text-center">La liste des categories</h4>
+            <!-- {{searcheForm.value|json}} -->
+            <div class="my-3">
+                <form class="d-flex" role="search" [formGroup]="searcheForm" (ngSubmit)="seracheCategorie()">
+                    <input class="form-control me-2" type="text" formControlName="motcle" placeholder="recherche une categorie ex: Electronique" aria-label="Search">
+                    <button class="btn btn-outline-success"><i class="bi bi-search"></i></button>
+                </form>
+            </div>
         </div>
         <div class="card-body">
             <table class="table">

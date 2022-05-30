@@ -1,5 +1,5 @@
 export interface Categorie{
-    id:number;
+    id:string;
     libelle:string;
     description:string;
     promotion:boolean;
